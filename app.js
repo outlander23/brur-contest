@@ -23,6 +23,8 @@ mongoose.connect(
 );
 app.use("/api", teamRoutes);
 app.use("/api", paymentRoutes);
-
+app.use("/", (req, res) => {
+  res.send("hi world");
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
