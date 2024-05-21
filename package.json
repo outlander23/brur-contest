@@ -1,0 +1,26 @@
+{
+  "name": "brur-programming-contest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/outlander23/brur-contest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/outlander23/brur-contest/issues"
+  },
+  "homepage": "https://github.com/outlander23/brur-contest#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "joi": "^17.13.1",
+    "mongoose": "^8.4.0"
+  },
+  "description": ""
+}
