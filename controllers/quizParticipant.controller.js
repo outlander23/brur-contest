@@ -60,7 +60,18 @@ exports.createQuizParticipant = async (req, res) => {
 exports.getQuizParticipants = async (req, res) => {
   try {
     const participants = await QuizParticipant.find({});
-    res.send(participants);
+
+    // Transform participants to show only the last 4 digits of the phone number
+    const modifiedParticipants = participants.map((participant) => {
+      const { phone, ...rest } = participant.toObject();
+      const modifiedPhone = phone.slice(-4).padStart(phone.length, "*");
+      return {
+        ...rest,
+        phone: modifiedPhone,
+      };
+    });
+
+    res.send(modifiedParticipants);
   } catch (err) {
     res.status(500).send({ errors: [{ message: err.message, path: [] }] });
   }
