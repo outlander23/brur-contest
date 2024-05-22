@@ -2,6 +2,7 @@ const express = require("express");
 const http = require("http");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const teamRoutes = require("./routes/team.routes");
 const paymentRoutes = require("./routes/payment.routes");
 const quizParticipantRoutes = require("./routes/quizParticipant.routes");
@@ -9,6 +10,9 @@ const quizParticipantRoutes = require("./routes/quizParticipant.routes");
 require("dotenv").config(); // Load environment variables from .env file
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.use(bodyParser.json());
 
