@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require("http");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const teamRoutes = require("./routes/team.routes");
@@ -21,10 +22,17 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
+
 app.use("/api", teamRoutes);
 app.use("/api", paymentRoutes);
+
 app.use("/", (req, res) => {
   res.send("hi world");
 });
+
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+
+// Create HTTP server
+http.createServer(app).listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
