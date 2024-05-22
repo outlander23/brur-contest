@@ -14,7 +14,7 @@ const quizParticipantSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  isPaymentConfirm: {
+  isPaymentConfirmed: {
     type: Boolean,
     default: false,
   },

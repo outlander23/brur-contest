@@ -29,3 +29,12 @@ exports.validatePayment = (payment) => {
 
   return schema.validate(payment);
 };
+exports.validateQuizParticipant = (data) => {
+  const schema = Joi.object({
+    name: Joi.string().required(),
+    phone: Joi.string().required(),
+    transactionId: Joi.string().required(),
+  });
+
+  return schema.validate(data);
+};
