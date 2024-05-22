@@ -11,11 +11,9 @@ exports.createTeam = async (req, res) => {
     return res.status(400).send("Team name is already taken.");
   }
 
-  // Check if any member's idcardNumber is already in use in another team
+  // Check if any member's email is already in use in another team
   const existingMember = await Team.findOne({
-    "members.idcardNumber": req.body.members.map(
-      (member) => member.idcardNumber
-    ),
+    "members.email": { $in: req.body.members.map((member) => member.email) },
   });
   if (existingMember) {
     return res
@@ -41,10 +39,8 @@ exports.getTeam = async (req, res) => {
   try {
     const teams = await Team.find({});
 
-    // Transform the teams to remove sensitive data
+    // Transform the teams to include the virtual field
     const modifiedTeams = teams.map((team) => {
-      const leader = { ...team.leader }; // Assuming leader is a separate object
-
       const members = team.members.map((member) => {
         const { email, contactNumber, ...memberRest } = member.toObject();
         return { ...memberRest };
@@ -52,8 +48,8 @@ exports.getTeam = async (req, res) => {
 
       return {
         ...team.toObject(),
-        leader,
         members,
+        isSenior: team.isSenior, // Include the virtual field
       };
     });
 
